@@ -6,9 +6,41 @@ import { quit } from '../main';
 let tray = null;
 let isQuitting = false;
 
+const options = {
+  showTray: false,
+  closeToTray: false,
+};
+
+function createMenu(): void {
+  const menuTemplate = [
+    {
+      label: 'File',
+      submenu: [
+          {
+            label: "Close",
+            accelerator: 'Ctrl+Q',
+            click: () => {
+              () => {
+                isQuitting = true;
+                quit();
+              }
+            }
+          },
+
+      ],
+    }
+  ];
+
+  const menu = Menu.buildFromTemplate(menuTemplate);
+  Menu.setApplicationMenu(menu);
+}
+
 export function createWindow(): void {
   // context menu configuration
   contextMenu({});
+
+  // top menu configuration
+  createMenu();
 
   // Create the browser window.
   const mainWindow = new BrowserWindow({
@@ -21,29 +53,32 @@ export function createWindow(): void {
       sandbox: true,
     },
   });
-  tray = new Tray(path.join(__dirname, '../resources/icons/128x128.png'));
-  tray.setContextMenu(
-    Menu.buildFromTemplate([
-      {
-        label: 'Show App',
-        click: function () {
-          mainWindow.show();
-        },
-      },
-      {
-        label: 'Quit',
-        click: function () {
-          isQuitting = true;
-          quit();
-        },
-      },
-    ])
-  );
 
-  mainWindow.setMenuBarVisibility(false);
 
-  mainWindow.on('close', function (event) {
-    if (!isQuitting) {
+
+  if (options.showTray) {
+    tray = new Tray(path.join(__dirname, '../resources/icons/128x128.png'));
+    tray.setContextMenu(
+      Menu.buildFromTemplate([
+        {
+          label: 'Show App',
+          click: () => {
+            mainWindow.show();
+          },
+        },
+        {
+          label: 'Quit',
+          click: () => {
+            isQuitting = true;
+            quit();
+          },
+        },
+      ])
+    );
+  }
+
+  mainWindow.on('close', (event) => {
+    if (!isQuitting && options.closeToTray) {
       event.preventDefault();
       mainWindow.hide();
     }
