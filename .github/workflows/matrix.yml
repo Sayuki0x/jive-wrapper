@@ -1,0 +1,37 @@
+name: build-jive-wrapper
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    name: ${{ matrix.os }} Build
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v1
+
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+
+      - name: Setup Cache
+        uses: actions/cache@v1
+        with:
+          path: node_modules
+          key: ${{ matrix.os }}-deps
+
+      - name: Dependencies
+        run: yarn
+
+      - name: Build
+        run: yarn package
+
+      - name: Store Build Artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: build_dir
+          path: ./release

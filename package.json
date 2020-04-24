@@ -1,0 +1,44 @@
+{
+  "name": "jive-wrapper",
+  "version": "1.0.0",
+  "description": "Simple wrapper for jive",
+  "main": "./dist/main.js",
+  "scripts": {
+    "start": "yarn build; electron .",
+    "build": "node ./node_modules/typescript/bin/tsc; cp -r resources ./dist",
+    "prettier": "node ./node_modules/prettier/bin-prettier.js '**/*.{ts,tsx,json,md}' --trailing-comma es5 --ignore-path .gitignore --single-quote --arrow-parens always --write",
+    "lint": "./node_modules/tslint/bin/tslint src/**/*.ts{,x}",
+    "package": "yarn build && electron-builder build --publish never"
+  },
+  "build": {
+    "productName": "Jive Phone",
+    "appId": "phone.jive.extra",
+    "files": [
+      "dist/**/*",
+      "package.json"
+    ],
+    "directories": {
+      "buildResources": "resources",
+      "output": "release"
+    },
+    "linux": {
+      "target": [
+        "deb"
+      ],
+      "category": "Communication"
+    }
+  },
+  "repository": "https://github.com/ExtraHash/jive-wrapper",
+  "author": "ExtraHash <extrahash@protonmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^8.2.3",
+    "electron-builder": "^22.5.1",
+    "prettier": "^2.0.5",
+    "tslint": "^6.1.1",
+    "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "electron-context-menu": "^1.0.0"
+  }
+}
