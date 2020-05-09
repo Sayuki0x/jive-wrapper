@@ -23,8 +23,7 @@
     },
     "linux": {
       "target": [
-        "AppImage",
-        "snap"
+        "deb"
       ],
       "category": "Communication"
     }
