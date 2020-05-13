@@ -2,7 +2,6 @@ import { BrowserWindow, Tray, Menu } from 'electron';
 import path from 'path';
 import contextMenu from 'electron-context-menu';
 import { quit } from '../main';
-import log from 'electron-log';
 
 let tray = null;
 let isQuitting = false;
