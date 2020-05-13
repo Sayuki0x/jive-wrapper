@@ -7,8 +7,8 @@ let tray = null;
 let isQuitting = false;
 
 const options = {
-  showTray: false,
-  closeToTray: false,
+  showTray: true,
+  closeToTray: true,
 };
 
 function createMenu(): void {
