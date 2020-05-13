@@ -2,6 +2,7 @@ import { BrowserWindow, Tray, Menu } from 'electron';
 import path from 'path';
 import contextMenu from 'electron-context-menu';
 import { quit } from '../main';
+import log from 'electron-log';
 
 let tray = null;
 let isQuitting = false;
@@ -12,27 +13,7 @@ const options = {
 };
 
 function createMenu(): void {
-  const menuTemplate = [
-    {
-      label: 'File',
-      submenu: [
-          {
-            label: "Close",
-            accelerator: 'Ctrl+Q',
-            click: () => {
-              () => {
-                isQuitting = true;
-                quit();
-              }
-            }
-          },
-
-      ],
-    }
-  ];
-
-  const menu = Menu.buildFromTemplate(menuTemplate);
-  Menu.setApplicationMenu(menu);
+  Menu.setApplicationMenu(null);
 }
 
 export function createWindow(): void {
