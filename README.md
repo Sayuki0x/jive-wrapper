@@ -2,4 +2,4 @@
 
 launches jive web phone in an electron app. doesn't do anything else.
 
-Icon was created from fontawesome's [phone-volume icon](https://fontawesome.com/icons/phone-volume?style=solid). The svg path was modified to be white and a green background was added, and it was rendered as a PNG icon.
+<div>Application icon made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>

@@ -34,8 +34,6 @@ export function createWindow(): void {
     },
   });
 
-
-
   if (options.showTray) {
     tray = new Tray(path.join(__dirname, '../resources/icons/128x128.png'));
     tray.setContextMenu(
