@@ -1,7 +1,8 @@
-import { BrowserWindow, Tray, Menu } from 'electron';
+import { BrowserWindow, Tray, Menu, protocol } from 'electron';
 import path from 'path';
 import contextMenu from 'electron-context-menu';
 import { quit } from '../main';
+import log from 'electron-log';
 
 let tray = null;
 let isQuitting = false;
@@ -33,6 +34,11 @@ export function createWindow(): void {
       sandbox: true,
     },
   });
+
+  protocol.registerHttpProtocol('tel', (req, cb) => {
+    log.info(req);
+    log.info(req.url);
+  })
 
   if (options.showTray) {
     tray = new Tray(path.join(__dirname, '../resources/icons/128x128.png'));
