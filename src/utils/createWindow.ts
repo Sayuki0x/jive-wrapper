@@ -3,12 +3,13 @@ import path from 'path';
 import contextMenu from 'electron-context-menu';
 import { quit } from '../main';
 import log from 'electron-log';
+import os from "os";
 
 let tray = null;
 let isQuitting = false;
 
 const options = {
-  showTray: true,
+  showTray: os.platform() !== "darwin",
   closeToTray: true,
 };
 
