@@ -1,4 +1,4 @@
-import { BrowserWindow, Tray, Menu, protocol } from 'electron';
+import { BrowserWindow, Tray, Menu, protocol, app } from 'electron';
 import path from 'path';
 import contextMenu from 'electron-context-menu';
 import { quit } from '../main';
@@ -16,6 +16,12 @@ const options = {
 function createMenu(): void {
   Menu.setApplicationMenu(null);
 }
+
+app.on('before-quit', function() {
+  if (process.platform === 'darwin') {
+    isQuitting = true;
+  }
+});
 
 export function createWindow(): void {
   // context menu configuration
@@ -67,8 +73,6 @@ export function createWindow(): void {
       event.preventDefault();
       mainWindow.hide();
     }
-
-    return false;
   });
 
   // load the app
