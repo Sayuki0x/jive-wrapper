@@ -28,8 +28,16 @@ app.on('window-all-closed', function () {
 });
 
 app.on('activate', function () {
-  if (BrowserWindow.getAllWindows().length === 0) createWindow();
+  if (BrowserWindow.getAllWindows().length === 0) {
+    createWindow();
+  } else {
+    const [window] = BrowserWindow.getAllWindows();
+    window.restore();
+    window.show();
+    window.focus(); 
+  }
 });
+
 
 export function quit() {
   app.quit();
