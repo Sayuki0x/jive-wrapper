@@ -1,6 +1,6 @@
 {
   "name": "jive-wrapper",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "Simple wrapper for jive",
   "main": "./dist/main.js",
   "scripts": {
@@ -30,9 +30,9 @@
     "mac": {
       "entitlements": "entitlements.mac.plist",
       "extendInfo": {
-           "NSMicrophoneUsageDescription": "Please give us access to your microphone"
-       }
-   }
+        "NSMicrophoneUsageDescription": "Please give us access to your microphone"
+      }
+    }
   },
   "repository": "https://github.com/ExtraHash/jive-wrapper",
   "author": "ExtraHash <extrahash@protonmail.com>",
