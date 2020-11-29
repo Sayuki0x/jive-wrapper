@@ -26,7 +26,13 @@
         "deb"
       ],
       "category": "Communication"
-    }
+    },
+    "mac": {
+      "entitlements": "entitlements.mac.plist",
+      "extendInfo": {
+           "NSMicrophoneUsageDescription": "Please give us access to your microphone"
+       }
+   }
   },
   "repository": "https://github.com/ExtraHash/jive-wrapper",
   "author": "ExtraHash <extrahash@protonmail.com>",

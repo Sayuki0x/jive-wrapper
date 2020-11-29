@@ -1,7 +1,8 @@
 // Modules to control application life and create native browser window
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, systemPreferences } from 'electron';
 import { createWindow } from './utils/createWindow';
 import log from 'electron-log';
+import os from "os";
 
 log.info('Launching client...');
 const applicationLock = app.requestSingleInstanceLock();
@@ -23,9 +24,13 @@ if (!applicationLock) {
 app.allowRendererProcessReuse = true;
 app.whenReady().then(createWindow);
 
+// app.on('ready', async() => {
+//   const value = await systemPreferences.askForMediaAccess("microphone");
+//   log.info(value);
+// });
 
 app.on('window-all-closed', function () {
-  if (process.platform !== 'darwin') app.quit();
+  if (os.platform() !== 'darwin') app.quit();
 });
 
 app.on('activate', function () {
@@ -38,7 +43,6 @@ app.on('activate', function () {
     window.focus(); 
   }
 });
-
 
 export function quit() {
   app.quit();

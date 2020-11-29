@@ -1,4 +1,4 @@
-import { BrowserWindow, Tray, Menu, protocol, app } from 'electron';
+import { BrowserWindow, Tray, Menu, protocol, app, systemPreferences } from 'electron';
 import path from 'path';
 import contextMenu from 'electron-context-menu';
 import { quit } from '../main';
@@ -23,7 +23,7 @@ app.on('before-quit', function() {
   }
 });
 
-export function createWindow(): void {
+export async function createWindow(): Promise<void> {
   // context menu configuration
   contextMenu({});
 
@@ -77,4 +77,5 @@ export function createWindow(): void {
 
   // load the app
   mainWindow.loadURL('https://my.jive.com');
+  await systemPreferences.askForMediaAccess("microphone");
 }
